@@ -19,7 +19,7 @@ Terraform provider for ICP which is IBM's cloud orchestration platform. It helps
 
 # Terraform Libvirt Provider
 
-This is the repository for the Terraform [Libvirt Provider[1] Provider, which we are using to deploy ICP-ce 2.1.0 on KVM hypervisor.
+This is the repository for the Terraform [Libvirt Provider][1], which we are using to deploy ICP-ce 2.1.0 on KVM hypervisor.
 
 [1]: https://github.com/dmacvicar/terraform-provider-libvirt
 
