@@ -1,7 +1,8 @@
 # Pre-requisites
 - [KVM installed and configured](https://help.ubuntu.com/community/KVM/Installation)
 - [Terraform Libvirt Provider Configured with Go Language](https://titosoft.github.io/kvm/terraform-and-kvm/)
-- Some disk space for your guests
+- [Some disk space for your guests node(Master, Boot, Proxy, Management, Worker)](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/supported_system_config/hardware_reqs.html)
+
 
 ## Inputs
 
