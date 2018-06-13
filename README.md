@@ -19,13 +19,11 @@ Terraform provider for ICP which is IBM's cloud orchestration platform. It helps
 
 # Terraform Libvirt Provider
 
-This is the repository for the Terraform [VMware NSX][1] Provider, which one can use
-with Terraform to work with VMware NSX.
+This is the repository for the Terraform [Libvirt Provider[1] Provider, which we are using to deploy ICP-ce 2.1.0 on KVM hypervisor.
 
-[1]: https://www.vmware.com/in/products/nsx.html
+[1]: https://github.com/dmacvicar/terraform-provider-libvirt
 
-Coverage is currently only limited to add Virtual Machines to security group in VMware's vSphere NSX.
-Watch this space!
+Using this configuration, One can able to deploy ICP-ce 2.1.0 with basic topology. After installing ICP-ce 2.1.0, One can add extra worker nodes also.
 
 For general information about Terraform, visit the [official website][3] and the
 [GitHub project page][4].
