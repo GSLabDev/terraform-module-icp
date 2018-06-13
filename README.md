@@ -1,7 +1,4 @@
-# Troubleshooting
-If ICL private installation fails, refer [Troubleshooting][4] of ICP official
 
-[4]: https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/troubleshoot/troubleshoot.html
 
 # Pre-requisites
 - [KVM installed and configured](https://help.ubuntu.com/community/KVM/Installation)
@@ -47,4 +44,7 @@ official release announcement found [here][4].
 
 [4]: https://www.hashicorp.com/blog/hashicorp-terraform-0-10/
 
-     
+# Troubleshooting
+If ICP private installation fails, refer [Troubleshooting][4] of ICP troubleshooting
+
+[4]: https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/troubleshoot/troubleshoot.html
