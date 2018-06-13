@@ -1,8 +1,7 @@
 # Pre-requisites
-- [KVM installed and configured](https://github.com/ibm-cloud-architecture/terraform-icp-softlayer)
+- [KVM installed and configured](https://help.ubuntu.com/community/KVM/Installation)
 - [Terraform Libvirt Provider Configured with Go Language](https://titosoft.github.io/kvm/terraform-and-kvm/)
-- [Some disk space for your guests](https://github.com/ibm-cloud-architecture/terraform-icp-vmware)
-
+- Some disk space for your guests
 
 ## Inputs
 
@@ -15,7 +14,7 @@
 
 
 # terraform-provider-icp
-Terraform provider for ICP which is IBM's cloud orchestration platform. It helps in doing installation of ICP in Distributed and Base mode.
+Terraform provider for ICP which is IBM's cloud orchestration platform. It helps in doing installation of ICP(CE) in Distributed and Basic topology.
 
 # Terraform Libvirt Provider
 
