@@ -1,3 +1,19 @@
+# Pre-requisites
+- [KVM installed and configured](https://github.com/ibm-cloud-architecture/terraform-icp-softlayer)
+- [Terraform Libvirt Provider Configured with Go Language](https://titosoft.github.io/kvm/terraform-and-kvm/)
+- [Some disk space for your guests](https://github.com/ibm-cloud-architecture/terraform-icp-vmware)
+
+
+## Inputs
+
+| Variable           | Default       |Required| Description                            |
+|--------------------|---------------|--------|----------------------------------------|
+|default_worker      |1              |Yes    |Number of default worker count|
+|extra_worker          | 0              |Optional*     |Number of extra worker nodes count  |
+|master_img_path          |            |Yes     |Path of the image for master node | 
+|worker_img_path          |            |Yes     |Path of the image for worker node | 
+
+
 # terraform-provider-icp
 Terraform provider for ICP which is IBM's cloud orchestration platform. It helps in doing installation of ICP in Distributed and Base mode.
 
@@ -28,3 +44,4 @@ official release announcement found [here][4].
 
 [4]: https://www.hashicorp.com/blog/hashicorp-terraform-0-10/
 
+     
