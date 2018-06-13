@@ -6,14 +6,15 @@
 - [Some disk space for your guests node(Master, Boot, Proxy, Management, Worker)](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/supported_system_config/hardware_reqs.html)
 
 
-## Inputs
+## Inputs( Edit is partially done)
 
-| Variable           | Default       |Required| Description                            |
-|--------------------|---------------|--------|----------------------------------------|
-|default_worker      |1              |Yes    |Number of default worker count|
-|extra_worker          | 0              |Optional*     |Number of extra worker nodes count  |
-|master_img_path          |            |Yes     |Path of the image for master node | 
-|worker_img_path          |            |Yes     |Path of the image for worker node | 
+| Variable           | Default       |Required| Description                            |File Location
+|--------------------|---------------|--------|----------------------------------------|--------
+|default_worker      |1              |Yes    |Number of default worker count|main.tf
+|extra_worker          | 0              |Optional*     |Number of extra worker nodes count  |main.tf
+|master_img_path          |            |Yes     |Path of the image for master node | main.tf
+|worker_img_path          |            |Yes     |Path of the image for worker node | main.tf
+|ssh_authorised_keys          |  Generate ssh key in Directory where main.tf present|Yes     | 
 
 
 # terraform-provider-icp
