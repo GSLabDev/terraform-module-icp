@@ -1,3 +1,5 @@
+# Troubleshooting
+If ICL private installation fails, refer [Troubleshooting][https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/troubleshoot/troubleshoot.html] of ICP official
 # Pre-requisites
 - [KVM installed and configured](https://help.ubuntu.com/community/KVM/Installation)
 - [Terraform Libvirt Provider Configured with Go Language](https://titosoft.github.io/kvm/terraform-and-kvm/)
