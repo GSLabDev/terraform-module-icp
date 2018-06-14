@@ -1,0 +1,347 @@
+
+
+#variable "counts" {
+#description = "Enter How many default worker node you Want ??"
+#}
+
+#variable "Excounts" {
+#description = "Enter How many Extra worker worker node you Want ??"
+
+#}
+
+
+# instance the provider
+provider "libvirt" {
+uri = "qemu:///system"
+}
+
+
+####################################################### Worker Nodes ################################################################
+
+
+# We fetch the latest ubuntu worker image from their mirrors
+
+resource "libvirt_volume" "ICP" {
+	name = "ICP"
+	pool = "default" #CHANGE_ME if you use anohter storage pool
+	source = "/work/images/newimages/ubuntu_worker"
+	format = "qcow2"
+}
+
+resource "libvirt_cloudinit" "worker" {
+        name           = "commoninit-${count.index}.iso"
+        pool = "default" #CHANGE_ME if you use anohter storage pool
+	ssh_authorized_key = "${file("./id_rsa.pub")}"
+        count = "${var.countsone}"   
+	#count = 1 
+}
+
+resource "libvirt_volume" "volume" {
+	name = "volume-${count.index}"
+	base_volume_id = "${libvirt_volume.ICP.id}"
+	count = "${var.countsone}"
+	#count = 1
+}
+
+
+# Create the resource VM for worker
+ 
+resource "libvirt_domain" "ICPworker" {
+	name = "ICPworker${count.index}"
+	memory = "7500"
+	vcpu = 6
+	count = "${var.countsone}"
+	#count = 1
+	cloudinit = "${element(libvirt_cloudinit.worker.*.id,count.index)}"
+
+
+	network_interface {
+  		hostname = "worker-${count.index}"
+  		network_name = "default"
+	}
+
+	console {
+  		type = "pty"
+  		target_port = "0"
+  		target_type = "serial"
+	}
+
+	console {
+    		type = "pty"
+    		target_type = "virtio"
+    		target_port = "1"
+	}
+
+	disk {
+      		volume_id = "${element(libvirt_volume.volume.*.id, count.index)}"
+	}
+
+	graphics {
+  		type = "spice"
+  		listen_type = "address"
+  		autoport = "true"
+	}
+
+	provisioner "remote-exec" {
+ 		inline = [
+   				"sudo hostnamectl set-hostname worker${count.index}",
+   				#"sudo systemctl reboot -i",
+ 			]
+	}
+
+	provisioner "local-exec" {
+    		 command = "echo 'worker' >> input.txt && echo 'worker${count.index} ${self.network_interface.0.addresses.0}' >> input.txt ",
+	}
+
+	connection {
+  		type = "ssh"
+  		user = "ubuntu"
+  		#password = "gsLab123"
+ 		#agent = "true"
+  		port = "22"
+ 		private_key = "${file("./id_rsa")}"
+	}
+
+}
+
+
+
+############# extraworker ##################################################################################################################
+
+# We fetch the latest ubuntu_extraworker image from their mirrors
+
+
+resource "libvirt_cloudinit" "exworker" {
+        name           = "excommoninit-${count.index}.iso"
+        pool = "default" #CHANGEME
+	ssh_authorized_key = "${file("./id_rsa.pub")}"
+        count = "${var.Excounts}"   
+	#count = 5 
+}
+
+resource "libvirt_volume" "exvolume" {
+	name = "exvolume-${count.index}"
+	base_volume_id = "${libvirt_volume.ICP.id}"
+	count = "${var.Excounts}"
+	#count = 5
+}
+
+
+# Create the resource for extra worker machine
+
+resource "libvirt_domain" "ExICPworker" {
+	name = "ExICPworker${count.index}"
+	memory = "7000"
+	vcpu = 6
+	count = "${var.Excounts}"
+	#count = 5
+	cloudinit = "${element(libvirt_cloudinit.exworker.*.id,count.index)}"
+
+
+	network_interface {
+  		hostname = "exworker-${count.index}"
+  		network_name = "default"
+	}
+
+	console {
+  	        type = "pty"
+		target_port = "0"
+  		target_type = "serial"
+	}
+
+	console {
+		type = "pty"
+		target_type = "virtio"
+		target_port = "1"
+	}
+
+	disk {
+	        volume_id = "${element(libvirt_volume.exvolume.*.id, count.index)}"
+	}
+
+	graphics {
+		 type = "spice"
+		 listen_type = "address"
+		 autoport = "true"
+	}
+
+	provisioner "remote-exec" {
+ 		inline = [
+			   #"sudo echo 'master0 ${libvirt_domain.ICPmaster.network_interface.0.addresses.0}' >> /etc/hosts",
+			   "sudo hostnamectl set-hostname exworker${count.index}",
+			   #"sudo systemctl reboot -i",
+ 		]
+	}
+
+	provisioner "local-exec" {
+		 command = "echo 'worker' >> input.txt && echo 'exworker${count.index} ${self.network_interface.0.addresses.0}' >> input.txt ",
+	}
+
+	connection {
+	 	 type     = "ssh"
+	 	 user     = "ubuntu"
+	  	#password = "gsLab123"
+	 	#agent = "true"
+	  	 port = "22"
+	 	 private_key = "${file("./id_rsa")}"
+	}
+
+}
+
+
+#############################################################master##############################################################
+
+#creating resource for /boot/master/proxy/management node 
+
+resource "libvirt_volume" "ICPmasters" {
+	name = "ICPmasters"
+	pool = "default" #CHANGE_ME
+	source = "/work/images/newimages/master/ubuntu_master"
+	format = "qcow2"
+}
+
+resource "libvirt_cloudinit" "master" {
+        name           = "master.iso"
+        pool = "default" #CHANGEME
+	ssh_authorized_key = "${file("./id_rsa.pub")}"
+           
+}
+
+# Create the machine
+resource "libvirt_domain" "ICPmaster" {
+	name = "ICPmaster"
+	memory = "20000"
+	vcpu = 16
+	cloudinit = "${libvirt_cloudinit.master.id}"
+
+
+	network_interface {
+		  hostname = "master"
+		  network_name = "default"
+	}
+
+	console {
+		  type        = "pty"
+		  target_port = "0"
+		  target_type = "serial"
+	}
+
+	console {
+	          type        = "pty"
+	          target_type = "virtio"
+	          target_port = "1"
+	}
+
+	disk {
+	      	  volume_id = "${libvirt_volume.ICPmasters.id}"
+	}
+
+	graphics {
+		  type = "spice"
+		  listen_type = "address"
+		  autoport = "true"
+	}
+
+	depends_on = ["libvirt_domain.ICPworker"]
+ 
+	provisioner "remote-exec" {
+	 	inline = [
+	   		 "sudo hostnamectl set-hostname master0",
+	   		#"sudo systemctl reboot -i",
+	    		"sleep 5",
+	 	]
+	}
+
+
+
+
+	provisioner "local-exec" {
+	      command = "echo 'master' >> input.txt && echo 'master0 ${libvirt_domain.ICPmaster.network_interface.0.addresses.0}' >> input.txt "
+	
+	}
+	
+	provisioner "file" {
+                source      = "./scripts/config.yaml"
+                destination = "/home/ubuntu/config.yaml"
+	}
+
+	provisioner "file" {
+	    		source      = "./input.txt"
+	    		destination = "/home/ubuntu/input.txt"
+	}
+
+	provisioner "file" {
+	    		source      = "./scripts/config.py"
+	    		destination = "/home/ubuntu/config.py"
+	}
+
+	provisioner "file" {
+	    		source      = "./scripts/test.sh"
+	    		destination = "/home/ubuntu/test.sh"
+	}
+
+	provisioner "remote-exec" {
+	  		script = "./scripts/installICP.sh",
+	}
+
+
+	provisioner "remote-exec" {
+	 	inline = [
+	  		"cd /opt/ibm-cloud-private-ce-2.1.0/cluster",
+	 		"sudo docker run -e LICENSE=accept --net=host -t -v $(pwd):/installer/cluster ibmcom/icp-inception:2.1.0 install ",
+			]
+	}
+
+
+	connection {
+	  		type     = "ssh"
+	  		user     = "ubuntu"
+	  		#agent    = "true"
+	  		port     = "22"
+	  		#private_key ="/root/terraform/key"
+	  		private_key = "${file("./id_rsa")}"
+	} 
+
+}
+
+output "ip" {
+ value = "${libvirt_domain.ICPmaster.network_interface.0.addresses.0}"
+}
+
+
+############################################ Adding worker node  ##############################################################
+
+
+resource "null_resource" "ExICPworker" {
+  #Changes to any instance of the cluster requires re-provisioning
+   count = "${var.Excounts}"
+
+	triggers {
+	      libvirt_domain.ExICPworker.id = "${join(",", libvirt_domain.ExICPworker.*.id)}"
+	}
+
+	depends_on = ["libvirt_domain.ExICPworker"]
+
+	provisioner "file" {
+	    		source      = "./input.txt"
+	    		destination = "/home/ubuntu/input.txt"
+	}
+
+
+	provisioner "remote-exec" {
+	 	script = "./scripts/installICP.sh"
+	}
+
+
+	connection {
+		        host = "${libvirt_domain.ICPmaster.network_interface.0.addresses.0}"
+	 		type     = "ssh"
+	  		user     = "ubuntu"
+	  		#agent    = "true"
+	  		port     = "22"
+	  		#private_key ="/root/terraform/key"
+	  		private_key = "${file("./id_rsa")}"
+	} 
+}
+
+
