@@ -6,16 +6,6 @@
 - [Some disk space for your guests node(Master, Boot, Proxy, Management, Worker) depending upon Topology one want to Deploy](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/supported_system_config/hardware_reqs.html)
 - [Different Ubuntu images which are resized depending upon disk space requirement](https://www.ibm.com/support/knowledgecenter/en/linuxonibm/com.ibm.linux.z.ldva/ldva_r_qemu-imgCommand.html)
 
-
-## Inputs( Edit is partially done)
-| Variable           | Default       |Required| Description                            |File Location
-|--------------------|---------------|--------|----------------------------------------|--------
-|default_worker      |1              |Yes    |Number of default worker count|main.tf
-|extra_worker          | 0              |Optional*     |Number of extra worker nodes count  |main.tf
-|master_img_path          |            |Yes     |Path of the image for master node | main.tf
-|worker_img_path          |            |Yes     |Path of the image for worker node | main.tf
-|ssh_authorised_keys          |  Generate ssh key in Directory where main.tf present|Yes     | 
-
 # Terraform Module
 
 This is the module for deployment of IBM cloud Private-CE 2.1.0 . It uses the Terraform [Libvirt Provider][1]. Using this module one can deploy IBM Cloud Private-CE 2.1.0 in Basic and Distributed topology.
