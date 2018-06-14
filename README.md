@@ -16,17 +16,14 @@
 |worker_img_path          |            |Yes     |Path of the image for worker node | main.tf
 |ssh_authorised_keys          |  Generate ssh key in Directory where main.tf present|Yes     | 
 
+# Terraform Module
 
-# terraform-provider-icp
-Terraform provider for ICP which is IBM's cloud orchestration platform. It helps in doing installation of ICP(CE) in Distributed and Basic topology.
-
-# Terraform Libvirt Provider
-
-This is the repository for the Terraform [Libvirt Provider][1], which we are using to deploy ICP-ce 2.1.0 on KVM hypervisor.
+This is the module for deployment of IBM cloud Private-CE 2.1.0 . It uses the Terraform [Libvirt Provider][1]. Using this module one can deploy IBM Cloud Private-CE 2.1.0 in Basic and Distributed topology.
 
 [1]: https://github.com/dmacvicar/terraform-provider-libvirt
 
-Using this configuration, One can able to deploy ICP-ce 2.1.0 with basic topology. After installing ICP-ce 2.1.0, One can add extra worker nodes also.
+This module contains two sub-modules namely Basic and Distributed. Basic sub-module can be used to deploy basic toplology of IBM cloud Private-CE 2.1.0. Distributed sub-module can be used to deploy Distributed toplology of IBM cloud Private-CE 2.1.0 
+After installing IBM cloud Private-CE 2.1.0, One can add extra worker nodes also.
 
 For general information about Terraform, visit the [official website][3] and the
 [GitHub project page][4].
@@ -34,10 +31,6 @@ For general information about Terraform, visit the [official website][3] and the
 [3]: https://terraform.io/
 [4]: https://github.com/hashicorp/terraform
 
-# Using the Provider
-
-The current version of this provider requires Terraform v0.11.7 or higher to
-run.
 
 Note that you need to run `terraform init` to fetch the provider before
 deploying. Read about the provider split and other changes to TF v0.11.7 in the
