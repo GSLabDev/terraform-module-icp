@@ -12,7 +12,7 @@ This is the module for deployment of IBM cloud Private-CE 2.1.0 . It uses the Te
 
 [1]: https://github.com/GSLabDev/terraform-provider-libvirt
 
-This module contains two sub-modules namely Basic and Distributed.
+This module contains two sub-modules namely Basic Topology and Distributed Topology.
 
 - Basic sub-module can be used to deploy basic toplology of IBM cloud Private-CE 2.1.0 . 
 - Distributed sub-module can be used to deploy Distributed toplology of IBM cloud Private-CE 2.1.0 .
