@@ -4,7 +4,7 @@
 - [KVM installed and configured](https://help.ubuntu.com/community/KVM/Installation)
 - [Terraform Libvirt Provider Configured with Go Language](https://titosoft.github.io/kvm/terraform-and-kvm/)
 - [Some disk space for your guests node(Master, Boot, Proxy, Management, Worker) depending upon Topology one want to Deploy](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/supported_system_config/hardware_reqs.html)
-- [Different Ubuntu images which are resized depending upon disk space requirement as per cluster node requirement(Master, boot, Proxy, Management, worker)](https://www.ibm.com/support/knowledgecenter/en/linuxonibm/com.ibm.linux.z.ldva/ldva_r_qemu-imgCommand.html)
+- [Ubuntu images which are resized depending upon disk space requirement of cluster nodes(Master, boot, Proxy, Management, worker)](https://www.ibm.com/support/knowledgecenter/en/linuxonibm/com.ibm.linux.z.ldva/ldva_r_qemu-imgCommand.html)
 
 # Terraform Module
 
