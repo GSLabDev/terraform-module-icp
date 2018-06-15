@@ -20,7 +20,7 @@ This module contains two sub-modules namely Basic Topology and Distributed Topol
 
 After installation of IBM cloud Private-CE 2.1.0, One can add extra worker nodes in both topology (Basic & Distributed).
 
-For general information about Terraform, visit the [official website][3] and the
+For general information about Terraform, visit the [Official website][3] and the
 [GitHub project page][4].
 
 [3]: https://terraform.io/
