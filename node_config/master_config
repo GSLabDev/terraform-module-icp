@@ -6,7 +6,7 @@ users:
     - <paste_your_public_key_here>
 chpasswd:
   list: |
-     root:password
+     root:<set_your_root_user_password>
   expire: False
 runcmd:
   - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin yes/' /etc/ssh/sshd_config 
