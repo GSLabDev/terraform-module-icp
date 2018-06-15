@@ -10,7 +10,7 @@
 
 This is the module for deployment of IBM cloud Private-CE 2.1.0 . It uses the Terraform [Libvirt Provider][1]. Using this module one can deploy IBM Cloud Private-CE 2.1.0 in Basic and Distributed topology.
 
-[1]: https://github.com/dmacvicar/terraform-provider-libvirt
+[1]: https://github.com/GSLabDev/terraform-provider-libvirt
 
 This module contains two sub-modules namely Basic and Distributed.
 
