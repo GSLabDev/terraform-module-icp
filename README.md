@@ -20,7 +20,7 @@ This module contains two sub-modules namely Basic Topology and Distributed Topol
 
 # IBM Cloud Private Cluster Configuration
 
-If One wants other configuration instead of default configuration, you can edit [config.yaml][2] file which is present in "scripts" folder.
+If One wants different cluster configuration instead of default configuration, you can edit [config.yaml][2] file which is present in "scripts" folder.
 
 [2]: https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/installing/config_yaml.html
 
