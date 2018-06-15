@@ -19,6 +19,6 @@ variable "worker_img_path"{
 }
 
 variable "ssh_private_key_path"{
-  decription = "SSH private key path"
+  description = "SSH private key path"
   default="/root/.ssh/id_rsa"
 }
