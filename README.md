@@ -8,9 +8,10 @@
 
 # Terraform Module
 
-This is the module for deployment of IBM cloud Private-CE 2.1.0 . It uses the Terraform [Libvirt Provider][1]. Using this module one can deploy IBM Cloud Private-CE 2.1.0 in Basic and Distributed topology.
+This is the module for deployment of IBM cloud Private-CE 2.1.0 . It uses the Terraform [Libvirt Provider][1]. Using this module one can deploy IBM Cloud Private-CE 2.1.0 in [Basic Topology and Distributed topology][7].
 
 [1]: https://github.com/GSLabDev/terraform-provider-libvirt
+[7]: https://www.ibm.com/developerworks/community/blogs/5092bd93-e659-4f89-8de2-a7ac980487f0/entry/Availability_considerations_for_single_ICP_cluster_topologies?lang=en_us
 
 This module contains two sub-modules namely Basic Topology and Distributed Topology.
 
