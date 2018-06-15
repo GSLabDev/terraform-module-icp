@@ -18,6 +18,12 @@ This module contains two sub-modules namely Basic Topology and Distributed Topol
 - Basic sub-module can be used to deploy basic toplology of IBM cloud Private-CE 2.1.0 . 
 - Distributed sub-module can be used to deploy Distributed toplology of IBM cloud Private-CE 2.1.0 .
 
+# IBM Cloud Private Cluster Configuration
+
+If One wants other configuration instead of default configuration, you can edit [config.yaml][2] file which is present in "scripts" folder.
+
+[2]: https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/installing/config_yaml.html
+
 After installation of IBM cloud Private-CE 2.1.0, One can add extra worker nodes in both topology (Basic & Distributed).
 
 For general information about Terraform, visit the [Official website][3] and the
