@@ -3,7 +3,7 @@ ssh_pwauth: True
 users:
   - name: root
     ssh_authorized_keys:
-    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3zADCkngMwJme2vdkLFBXjkkT4mIvEASdK2zbys94rbJOh0nWvi+Ovzt9/yk4boR3txHVDtYAgiUdK7E99K9LzL11aIJtoKtMtXBz/WEDge0KgInAmP/Py0/aFCId+nC1MO4I4p+43AqQuP3vGh1w8FH53rF1DZx+IQBYcisC1FZmwCkssuIWfaWZ68vadZSiM7eoPq6XfQw5ZEv5LdcudW0hrmLvseOwivIeGsTZq+GOx9aYRoE20X+f45jDAYbBIYOGJCwe/WhVAdue7bhJq5aZMaWTyGsjtKutepa0xoqhXqDiR6sGk6upr1ApLsYfM/gYnVkwcJW1FDXEIQ7z root@gs-4149
+    - <paste_your_public_key_here>
 chpasswd:
   list: |
      root:password
