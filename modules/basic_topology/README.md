@@ -5,12 +5,6 @@ This is the module for deployment of IBM Cloud Private-CE 2.1.0 . Using this sub
 
 [1]: https://www.ibm.com/developerworks/community/blogs/5092bd93-e659-4f89-8de2-a7ac980487f0/entry/Availability_considerations_for_single_ICP_cluster_topologies?lang=en
 
-# IBM Cloud Private Cluster Configuration
-
-If One wants other configuration instead of default configuration, you can edit [config.yaml][2] file which is present in "scripts" folder.
-
-[2]: https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/installing/config_yaml.html
-
 # Prerequisites
 
 For ICP cluster deployment, It needs ssh key-value-pair, number of worker nodes and images path in main.tf
