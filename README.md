@@ -17,7 +17,7 @@ This module contains two sub-modules namely Basic and Distributed.
 - Basic sub-module can be used to deploy basic toplology of IBM cloud Private-CE 2.1.0 . 
 - Distributed sub-module can be used to deploy Distributed toplology of IBM cloud Private-CE 2.1.0 .
 
-After installing IBM cloud Private-CE 2.1.0, One can add extra worker nodes also.
+After installation of IBM cloud Private-CE 2.1.0, One can add extra worker nodes in both topology (Basic & Distributed).
 
 For general information about Terraform, visit the [official website][3] and the
 [GitHub project page][4].
