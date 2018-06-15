@@ -26,8 +26,8 @@ For general information about Terraform, visit the [Official website][3] and the
 [3]: https://terraform.io/
 [4]: https://github.com/hashicorp/terraform
 
-Note: User will need to setup Terraform along with Libvirt provider from above mentioned repo and then run `terraform init`
-deploying. Read about the provider split and other changes to TF v0.11.7 in the
+Note: User will need to setup Terraform along with Libvirt provider from above mentioned repo and then run `terraform init`. 
+Read about the provider split and other changes to TF v0.11.7 in the
 official release announcement found [here][4].
 
 [4]: https://www.hashicorp.com/blog/hashicorp-terraform-0-10/
