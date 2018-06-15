@@ -105,7 +105,3 @@ resource "libvirt_domain" "ICP_boot" {
                private_key = "${file("${var.ssh_private_key_path}")}"
     }    
 }
-
-output "boot-ip" {
-     value = "${libvirt_domain.ICP_boot.network_interface.0.addresses.0}"
-}
