@@ -10,12 +10,27 @@ variable "extra_worker" {
 
 variable "master_img_path"{
   description = "Ubuntu Image Path for master node"
-  default="/work/images/newimages/master/ubuntu_master"
+  default="/work/images/newimages/ubuntu_master"
 }
 
 variable "worker_img_path"{
   description = "Ubuntu Image Path for worker node"
   default="/work/images/newimages/ubuntu_worker"
+}
+
+variable "boot_img_path"{
+  description = "Ubuntu Image Path for boot node"
+  default="/work/images/newimages/ubuntu_boot"
+}
+
+variable "mng_img_path"{
+  description = "Ubuntu Image Path for management node"
+  default="/work/images/newimages/ubuntu_mng"
+}
+
+variable "proxy_img_path"{
+  description = "Ubuntu Image Path for proxy node"
+  default="/work/images/newimages/ubuntu_proxy"
 }
 
 variable "ssh_private_key_path"{
