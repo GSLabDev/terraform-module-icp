@@ -14,17 +14,17 @@ resource "libvirt_volume" "ICP" {
 resource "libvirt_cloudinit" "worker" {
        name           = "commoninit-${count.index}.iso"
        pool = "default" #CHANGE_ME if you use anohter storage pool
-       #count = "${var.counts}"  
+       count = "${var.default_worker}"  
        user_data = "${file("node_config/worker_config")}"
        local_hostname = "worker${count.index}"
-    count = 1 
+       #count = 1 
 }
 
 resource "libvirt_volume" "volume" {
     name = "volume-${count.index}"
     base_volume_id = "${libvirt_volume.ICP.id}"
-    #count = "${var.counts}"
-    count = 1
+    count = "${var.default_worker}"
+    #count = 1
 }
 
 
@@ -34,8 +34,8 @@ resource "libvirt_domain" "ICPworker" {
     name = "ICPworker${count.index}"
     memory = "7500"
     vcpu = 6
-    #count = "${var.counts}"
-    count = 1
+    count = "${var.default_worker}"
+    #count = 1
     cloudinit = "${element(libvirt_cloudinit.worker.*.id,count.index)}"
 
 
