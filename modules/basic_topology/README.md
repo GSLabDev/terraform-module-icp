@@ -12,7 +12,8 @@ For ICP cluster deployment, It needs ssh key-value-pair, number of worker nodes 
 ## For configuration of cloud-init required steps
 
 - generate your ssh [ssh-key-value](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-1604) 
-- past your public key(.pub) at <paste_your_public_key_here> in /node_config/master_config , /node_config/worker_config & /node_config/extraworker_config files
+- past your public key(.pub) at <paste_your_public_key_here> in node_config/master_config , node_config/worker_config & node_config/extraworker_config files
+- set root user password for guest nodes at <set_your_root_user_password> in node_config/master_config , node_config/worker_config & node_config/extraworker_config files
 
 ## Inputs
 | Variable           | Default       |Required| Description                            |File Location
