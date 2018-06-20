@@ -1,9 +1,7 @@
 
 ####################################################### Worker Nodes ################################################################
 
-
 # We fetch the latest ubuntu worker image from their mirrors
-
 resource "libvirt_volume" "ICP" {
     name = "ICP"
     pool = "default" #CHANGE_ME if you use anohter storage pool
@@ -17,7 +15,7 @@ resource "libvirt_cloudinit" "worker" {
        count = "${var.default_worker}"  
        user_data = "${file("node_config/worker_config")}"
        local_hostname = "worker${count.index}"
-       #count = 1 
+#    count = 1 
 }
 
 resource "libvirt_volume" "volume" {
@@ -30,10 +28,10 @@ resource "libvirt_volume" "volume" {
 
 # Create the resource VM for worker
 
-resource "libvirt_domain" "ICPworker" {
-    name = "ICPworker${count.index}"
-    memory = "7500"
-    vcpu = 6
+resource "libvirt_domain" "ICP_worker" {
+    name = "ICP_worker${count.index}"
+    memory = "5096"
+    vcpu = 2
     count = "${var.default_worker}"
     #count = 1
     cloudinit = "${element(libvirt_cloudinit.worker.*.id,count.index)}"
@@ -81,7 +79,7 @@ resource "libvirt_domain" "ICPworker" {
                destination = "/root/.ssh/id_rsa"
        }
     provisioner "local-exec" {
-            command = "echo 'worker' > input.txt && echo 'worker${count.index} ${self.network_interface.0.addresses.0}' >> input.txt ",
+            command = "echo 'worker' >> input.txt && echo 'worker${count.index} ${self.network_interface.0.addresses.0}' >> input.txt ",
     }
 
     connection {
@@ -90,4 +88,7 @@ resource "libvirt_domain" "ICPworker" {
        port = "22"
         private_key = "${file("${var.ssh_private_key_path}")}"
     }
+    
+    depends_on = ["libvirt_domain.ICP_mng"]
+
 }

@@ -1,10 +1,8 @@
-#"${var.master_img_path}"
-
-#############################################################master##############################################################
+############################################################# Boot Nodes ##############################################################
 resource "libvirt_volume" "ubuntu_boot" {
      name = "ubuntu_boot"
      pool = "default"
-     source = "${var.master_img_path}"
+     source = "${var.boot_img_path}"
      format = "qcow2"
 }
 
@@ -12,18 +10,18 @@ resource "libvirt_volume" "ubuntu_boot" {
 resource "libvirt_cloudinit" "boot" {
        name           = "boot.iso"
        pool = "default"
-       user_data = "${file("node_config/master_config")}"
-       local_hostname = "master0"
+       user_data = "${file("node_config/boot_config")}"
+       local_hostname = "boot0"
 }
 
 # Create the machine
 resource "libvirt_domain" "ICP_boot" {
      name = "ICP_boot"
-     memory = "17000"
-     vcpu = 12
+     memory = "5096"
+     vcpu = 2
      cloudinit = "${libvirt_cloudinit.boot.id}"
      network_interface {
-           hostname = "master0"
+           hostname = "boot0"
            network_name = "default"
      }
 
@@ -49,11 +47,10 @@ resource "libvirt_domain" "ICP_boot" {
            autoport = "true"
      }
 
+     
      provisioner "local-exec" {
-           command = "echo 'master' >> input.txt && echo 'master0 ${libvirt_domain.ICP_boot.network_interface.0.addresses.0}' >> input.txt "
+           command = "echo 'boot' >> input.txt && echo 'boot0 ${libvirt_domain.ICP_boot.network_interface.0.addresses.0}' >> input.txt "
      }
-
-    depends_on = ["libvirt_domain.ICPworker"]
       
      provisioner "remote-exec" {
         inline = [
@@ -91,6 +88,8 @@ resource "libvirt_domain" "ICP_boot" {
         script = "./scripts/installICP.sh"
     }
 
+    
+
     provisioner "remote-exec" {
         inline = [
               "cd /opt/ibm-cloud-private-ce-2.1.0/cluster",
@@ -98,15 +97,13 @@ resource "libvirt_domain" "ICP_boot" {
             ]
     }
 
+    
     connection {
                type = "ssh"
                user = "root"
                port = "22"
                private_key = "${file("${var.ssh_private_key_path}")}"
-    }    
-}
+    }
 
-output "boot-ip" {
-     value = "${libvirt_domain.ICP_boot.network_interface.0.addresses.0}"
+     depends_on = ["libvirt_domain.ICP_proxy"]    
 }
-

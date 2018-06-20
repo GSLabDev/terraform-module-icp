@@ -1,0 +1,14 @@
+#cloud-config
+ssh_pwauth: True
+users:
+  - name: root
+    ssh_authorized_keys:
+    - <paste_your_public_key_here>
+chpasswd:
+  list: |
+     root:<set_your_root_user_password>
+  expire: False
+runcmd:
+  - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin yes/' /etc/ssh/sshd_config 
+  - service sshd restart
+  - chmod 700 /root/.ssh/authorized_keys
