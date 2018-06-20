@@ -60,12 +60,13 @@ resource "libvirt_domain" "ICP_proxy" {
             ]
     }
 
-#    provisioner "remote-exec" {
- #          script = "./scripts/prereq.sh"
-  #  }
-       provisioner "file" {
-               source      ="${var.ssh_private_key_path}"
-               destination = "/root/.ssh/id_rsa"
+    provisioner "remote-exec" {
+           script = "./scripts/prereq.sh"
+    }
+       
+    provisioner "file" {
+           source      ="${var.ssh_private_key_path}"
+           destination = "/root/.ssh/id_rsa"
        }
 
     connection {

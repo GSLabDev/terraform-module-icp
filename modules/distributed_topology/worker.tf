@@ -64,9 +64,9 @@ resource "libvirt_domain" "ICP_worker" {
             ]
     }
 
-#    provisioner "remote-exec" {
- #          script = "./scripts/prereq.sh"
-  #  }
+    provisioner "remote-exec" {
+           script = "./scripts/prereq.sh"
+    }
 
     graphics {
          type = "spice"

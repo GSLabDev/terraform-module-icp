@@ -56,9 +56,9 @@ resource "libvirt_domain" "ExICPworker" {
             ]
     }
 
-#    provisioner "remote-exec" {
- #          script = "./scripts/prereq.sh"
-  #  }
+    provisioner "remote-exec" {
+           script = "./scripts/prereq.sh"
+    }
 
     provisioner "local-exec" {
          command = "echo 'worker' >> input.txt && echo 'exworker${count.index} ${self.network_interface.0.addresses.0}' >> input.txt ",

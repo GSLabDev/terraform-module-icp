@@ -20,7 +20,7 @@ module "distributed_topo" {
   master_img_path ="<paste_master_image_path>"
   
   #common parameter for basic and distributed topology 
-  ssh_private_key_path = "/root/.ssh/id_rsa"
+  ssh_private_key_path = "<paste_path_of_id_rsa>"
   default_worker="1"
   extra_worker= "0"
 }
