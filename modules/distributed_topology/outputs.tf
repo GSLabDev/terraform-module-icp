@@ -5,11 +5,11 @@ output "mng-ip" {
 }
 
 
-#output "boot-ip" {
- #    depends_on = ["libvirt_domain.ICP_boot"]
-  #   description = "Boot node IP: "
-   #  value = "${libvirt_domain.ICP_boot.network_interface.0.addresses.0}"
-#}
+output "boot-ip" {
+     depends_on = ["libvirt_domain.ICP_boot"]
+     description = "Boot node IP: "
+     value = "${libvirt_domain.ICP_boot.network_interface.0.addresses.0}"
+}
 
 output "master-ip" {
      depends_on = ["libvirt_domain.ICP_master"]
@@ -22,6 +22,3 @@ output "proxy-ip" {
      description = "Proxy node IP..."
      value = "${libvirt_domain.ICP_proxy.network_interface.0.addresses.0}"
 }
-
-
-
