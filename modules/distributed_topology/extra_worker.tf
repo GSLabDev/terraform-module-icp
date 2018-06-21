@@ -22,7 +22,11 @@ resource "libvirt_domain" "ExICPworker" {
     count = "${var.extra_worker}"
     #count = 5
     cloudinit = "${element(libvirt_cloudinit.exworker.*.id,count.index)}"
-    depends_on = ["libvirt_domain.ICP_boot"]
+
+    depends_on = [
+		   "libvirt_domain.ICP_boot"
+		] 
+
     network_interface {
          hostname = "exworker${count.index}"
          network_name = "default"
@@ -85,7 +89,9 @@ resource "null_resource" "ExICPworker" {
           libvirt_domain.ExICPworker.id = "${join(",", libvirt_domain.ExICPworker.*.id)}"
     }
 
-    depends_on = ["libvirt_domain.ExICPworker"]
+    depends_on = [
+		 "libvirt_domain.ExICPworker"
+  		 ]
 
     provisioner "file" {
                 source      = "./input.txt"
