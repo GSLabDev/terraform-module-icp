@@ -44,7 +44,7 @@ resource "libvirt_domain" "ICP_proxy" {
      }
      graphics {
            type = "spice"
-           listen_type = "address"
+           listen_type = "address"  
            autoport = "true"
      }
 
@@ -52,7 +52,9 @@ resource "libvirt_domain" "ICP_proxy" {
            command = "echo 'proxy' >> input.txt && echo 'proxy0 ${libvirt_domain.ICP_proxy.network_interface.0.addresses.0}' >> input.txt "
      }
 
-    depends_on = ["libvirt_domain.ICP_master"]
+    depends_on = [
+		  "libvirt_domain.ICP_master"
+		 ]
       
      provisioner "remote-exec" {
         inline = [

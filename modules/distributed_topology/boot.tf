@@ -105,5 +105,7 @@ resource "libvirt_domain" "ICP_boot" {
                private_key = "${file("${var.ssh_private_key_path}")}"
     }
 
-     depends_on = ["libvirt_domain.ICP_proxy"]    
+     depends_on = [
+               	    "libvirt_domain.ICP_proxy"
+                  ]    
 }
