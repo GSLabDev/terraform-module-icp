@@ -111,5 +111,4 @@ resource "libvirt_domain" "ICP_boot" {
   depends_on = [
     "libvirt_domain.ICP_proxy",
   ]
-
 }

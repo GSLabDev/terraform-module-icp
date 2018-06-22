@@ -13,7 +13,7 @@ resource "libvirt_cloudinit" "worker" {
   pool           = "default"                              #CHANGE_ME if you use anohter storage pool
   count          = "${var.default_worker}"
   user_data      = "${file("node_config/worker_config")}"
-  local_hostname = "worker${count.index}"  
+  local_hostname = "worker${count.index}"
 }
 
 resource "libvirt_volume" "volume" {
@@ -89,5 +89,4 @@ resource "libvirt_domain" "ICP_worker" {
   depends_on = [
     "libvirt_domain.ICP_mng",
   ]
-
 }

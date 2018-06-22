@@ -63,22 +63,17 @@ resource "libvirt_domain" "ICP_mng" {
       "mkdir -p /opt/icp_config",
     ]
   }
-
   provisioner "remote-exec" {
     script = "./scripts/prereq.sh"
   }
-
   provisioner "file" {
     source      = "${var.ssh_private_key_path}"
     destination = "/root/.ssh/id_rsa"
   }
-
   connection {
     type        = "ssh"
     user        = "root"
     port        = "22"
     private_key = "${file("${var.ssh_private_key_path}")}"
   }
-
 }
-
