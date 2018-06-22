@@ -4,16 +4,12 @@ resource "libvirt_cloudinit" "exworker" {
   count          = "${var.extra_worker}"
   user_data      = "${file("node_config/extraworker_config")}"
   local_hostname = "exworker${count.index}"
-
-   
 }
 
 resource "libvirt_volume" "exvolume" {
   name           = "exvolume-${count.index}"
   base_volume_id = "${libvirt_volume.ICP.id}"
   count          = "${var.extra_worker}"
-
-  
 }
 
 # Create the resource for extra worker machine
@@ -23,7 +19,6 @@ resource "libvirt_domain" "ExICPworker" {
   vcpu   = 2
   count  = "${var.extra_worker}"
 
-  
   cloudinit = "${element(libvirt_cloudinit.exworker.*.id,count.index)}"
 
   depends_on = [
@@ -110,4 +105,3 @@ resource "null_resource" "ExICPworker" {
     private_key = "${file("${var.ssh_private_key_path}")}"
   }
 }
-

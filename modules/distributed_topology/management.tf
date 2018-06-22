@@ -79,6 +79,4 @@ resource "libvirt_domain" "ICP_mng" {
     port        = "22"
     private_key = "${file("${var.ssh_private_key_path}")}"
   }
-
 }
-

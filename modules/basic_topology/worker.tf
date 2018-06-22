@@ -15,16 +15,12 @@ resource "libvirt_cloudinit" "worker" {
   count          = "${var.default_worker}"
   user_data      = "${file("node_config/worker_config")}"
   local_hostname = "worker${count.index}"
-
- 
 }
 
 resource "libvirt_volume" "volume" {
   name           = "volume-${count.index}"
   base_volume_id = "${libvirt_volume.ICP.id}"
   count          = "${var.default_worker}"
-
-  
 }
 
 # Create the resource VM for worker
