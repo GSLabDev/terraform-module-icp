@@ -16,7 +16,7 @@ resource "libvirt_cloudinit" "worker" {
   user_data      = "${file("node_config/worker_config")}"
   local_hostname = "worker${count.index}"
 
-  #count = 1 
+ 
 }
 
 resource "libvirt_volume" "volume" {
@@ -24,7 +24,7 @@ resource "libvirt_volume" "volume" {
   base_volume_id = "${libvirt_volume.ICP.id}"
   count          = "${var.default_worker}"
 
-  #count = 1
+  
 }
 
 # Create the resource VM for worker
@@ -76,7 +76,7 @@ resource "libvirt_domain" "ICPworker" {
   }
 
   provisioner "file" {
-    source      = "id_rsa"
+    source      = "${var.ssh_private_key_path}"
     destination = "/root/.ssh/id_rsa"
   }
 

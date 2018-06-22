@@ -13,17 +13,13 @@ resource "libvirt_cloudinit" "worker" {
   pool           = "default"                              #CHANGE_ME if you use anohter storage pool
   count          = "${var.default_worker}"
   user_data      = "${file("node_config/worker_config")}"
-  local_hostname = "worker${count.index}"
-
-  #    count = 1 
+  local_hostname = "worker${count.index}"  
 }
 
 resource "libvirt_volume" "volume" {
   name           = "volume-${count.index}"
   base_volume_id = "${libvirt_volume.ICP.id}"
   count          = "${var.default_worker}"
-
-  #count = 1
 }
 
 # Create the resource VM for worker
@@ -75,7 +71,7 @@ resource "libvirt_domain" "ICP_worker" {
   }
 
   provisioner "file" {
-    source      = "id_rsa"
+    source      = "${var.ssh_private_key_path}"
     destination = "/root/.ssh/id_rsa"
   }
 
@@ -93,4 +89,5 @@ resource "libvirt_domain" "ICP_worker" {
   depends_on = [
     "libvirt_domain.ICP_mng",
   ]
+
 }
