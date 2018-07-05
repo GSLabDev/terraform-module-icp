@@ -81,7 +81,7 @@ resource "null_resource" "ExICPworker" {
   count = "${var.extra_worker}"
 
   triggers {
-    libvirt_domain.ExICPworker.id = "${join(",", libvirt_domain.ExICPworker.*.id)}"
+    "libvirt_domain.ExICPworker.id" = "${join(",", libvirt_domain.ExICPworker.*.id)}"
   }
 
   depends_on = [
